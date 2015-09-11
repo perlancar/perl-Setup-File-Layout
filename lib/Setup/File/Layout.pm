@@ -82,7 +82,7 @@ sub setup_files_using_layout {
             }];
         } elsif ($e->{is_symlink}) {
             push @actions, ["Setup::File::Symlink::setup_symlink" => {
-                symlink => abs_path($p) . "/$e->{name}",
+                symlink => Cwd::abs_path($p) . "/$e->{name}",
                 target  => $e->{symlink_target},
                 #mode    => $e->{perm},
                 #owner   => $e->{user},
@@ -100,6 +100,7 @@ sub setup_files_using_layout {
         }
     }
 
+    #use DD; dd \@actions;
     Perinci::Tx::Util::use_other_actions(actions => \@actions);
 }
 
